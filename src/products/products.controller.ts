@@ -11,12 +11,12 @@ export class ProductsController {
         @Body('description') prodDescription: string,
         @Body('price') prodPrice: number
         ):any{
-        const generatedId = this.productService.insertProduct(
+        const product = this.productService.insertProduct(
             prodTitle, 
             prodDescription, 
             prodPrice
         );
-        return { id: generatedId}
+        return product
     }
 
     @Get()
@@ -36,13 +36,11 @@ export class ProductsController {
         @Body('description') prodDescription: string,
         @Body('price') prodPrice: number
         ){
-            this.productService.updateProduct(prodId, prodTitle, prodDescription, prodPrice)
-            return null;
+            return this.productService.updateProduct(prodId, prodTitle, prodDescription, prodPrice)
         }
 
     @Delete(':id')
     removeProduct( @Param('id') prodId: string){
-        this.productService.deleteProduct(prodId);
-        return null
+        return this.productService.deleteProduct(prodId);
     }
 }
